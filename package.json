@@ -15,6 +15,7 @@
     "prebuild": "npm run lint",
     "precommit": "npm run lint && npm run test:single-run",
     "prerelease": "npm run build",
+    "prepare": "ngc && npm run build",
     "release": "sh ./scripts/release.sh",
     "start": "ng serve --aot -o --port 5000 --host 0.0.0.0",
     "serve:docs": "compodoc --serve --open --output=\"docs/\"",
