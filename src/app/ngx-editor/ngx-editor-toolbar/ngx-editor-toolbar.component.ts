@@ -152,7 +152,7 @@ export class NgxEditorToolbarComponent implements OnInit {
       const file = e.target.files[0];
 
       try {
-        this._commandExecutorService.uploadImage(file, this.config.imageEndPoint).subscribe(event => {
+        this._commandExecutorService.uploadImagetoSP(file, this.config.imageEndPoint,this.config.imageFolderPath).subscribe(event => {
 
           if (event.type) {
             this.updloadPercentage = Math.round(100 * event.loaded / event.total);

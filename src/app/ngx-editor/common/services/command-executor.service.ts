@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import * as Utils from '../utils/ngx-editor.utils';
-
+import { Web } from '@pnp/pnpjs';
 @Injectable()
 export class CommandExecutorService {
 
@@ -148,6 +148,31 @@ export class CommandExecutorService {
       throw new Error('Invalid Image');
     }
   }
+
+  uploadImagetoSP(file: File, endPoint: string, folderPath: string): any {
+    if (file) {
+      let data;
+      if (file.size <= 10485760) {
+        // small upload
+        let date = new Date();
+        let timestamp = date.getTime();
+        return new Web.getFolderByServerRelativeUrl(folderPath).files.add(file.name + timestamp, file, true).then(
+          _ => {
+            let url = endPoint + folderPath + file.name + timestamp;
+            let promise = Promise.resolve(url);
+            return promise;
+          }
+        ).catch((e) => { throw new Error('Invalid Image'); });
+      }
+      else {
+        throw new Error('Invalid Image');
+      }
+    } else {
+      throw new Error('Invalid Image');
+    }
+  }
+
+
 
   /**
    * inserts link in the editor

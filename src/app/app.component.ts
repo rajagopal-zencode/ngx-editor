@@ -21,6 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
     height: '10rem',
     minHeight: '5rem',
     placeholder: 'Type something. Test the Editor... ヽ(^。^)丿',
+    imageEndPoint:'https://lokeshraj.sharepoint.com/',
+    imageFolderPath:'/SiteCollectionImages/',
     translate: 'no'
   };
 

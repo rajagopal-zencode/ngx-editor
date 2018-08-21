@@ -74,6 +74,7 @@ export class NgxEditorComponent implements OnInit, ControlValueAccessor {
   @Input() enableToolbar: boolean;
   /** Endpoint for which the image to be uploaded */
   @Input() imageEndPoint: string;
+  @Input() imageFolderPath:string;
 
   /** emits `blur` event when focused out from the textarea */
   @Output() blur: EventEmitter<string> = new EventEmitter<string>();
@@ -243,6 +244,7 @@ export class NgxEditorComponent implements OnInit, ControlValueAccessor {
       enableToolbar: this.enableToolbar,
       showToolbar: this.showToolbar,
       imageEndPoint: this.imageEndPoint,
+      imageFolderPath:this.imageFolderPath,
       toolbar: this.toolbar
     };
   }
