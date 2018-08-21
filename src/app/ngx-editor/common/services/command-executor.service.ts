@@ -154,9 +154,8 @@ export class CommandExecutorService {
       let data;
       if (file.size <= 10485760) {
         // small upload
-        let date = new Date();
-        let timestamp = date.getTime();
-        return new Web.getFolderByServerRelativeUrl(folderPath).files.add(file.name + timestamp, file, true).then(
+        let timestamp = new Date().getTime();
+        return new Web(endPoint).getFolderByServerRelativeUrl(folderPath).files.add(file.name + timestamp, file, true).then(
           _ => {
             let url = endPoint + folderPath + file.name + timestamp;
             let promise = Promise.resolve(url);

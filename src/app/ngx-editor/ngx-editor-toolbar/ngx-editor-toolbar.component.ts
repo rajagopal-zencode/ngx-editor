@@ -143,39 +143,28 @@ export class NgxEditorToolbarComponent implements OnInit {
    *
    * @param e onChange event
    */
-  onFileChange(e): void {
 
-    this.uploadComplete = false;
-    this.isUploading = true;
+
+  onFileChange(e): void {
 
     if (e.target.files.length > 0) {
       const file = e.target.files[0];
-
       try {
-        this._commandExecutorService.uploadImagetoSP(file, this.config.imageEndPoint,this.config.imageFolderPath).subscribe(event => {
-
-          if (event.type) {
-            this.updloadPercentage = Math.round(100 * event.loaded / event.total);
-          }
-
-          if (event instanceof HttpResponse) {
-            try {
-              this._commandExecutorService.insertImage(event.body.url);
-            } catch (error) {
-              this._messageService.sendMessage(error.message);
-            }
-            this.uploadComplete = true;
-            this.isUploading = false;
-          }
-        });
+        this._commandExecutorService.uploadImagetoSP(file, this.config.imageEndPoint, this.config.imageFolderPath).then(event => {
+          this.updloadPercentage = 100;
+          this._commandExecutorService.insertImage(event);
+          this.uploadComplete = true;
+          this.isUploading = false;
+          this.imagePopover.hide();
+        }).catch((e) => { this._messageService.sendMessage(e.message); });
       } catch (error) {
         this._messageService.sendMessage(error.message);
         this.uploadComplete = true;
         this.isUploading = false;
+        this.imagePopover.hide();
       }
 
     }
-
     return;
   }
 
